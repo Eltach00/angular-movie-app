@@ -1,1 +1,3 @@
-<p>home works!</p>
+<slider *ngFor="let movie of movies" [movie]="movie"></slider>
+
+<ng-template #loading> <div class="text-center">Loading...</div> </ng-template>

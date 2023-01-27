@@ -7,14 +7,16 @@ import { MovieService } from 'src/app/shared/services/movie-service.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  movies;
+  movies = [];
+  moviesDownloaded = false;
   constructor(private movieServivce: MovieService) {}
 
   ngOnInit(): void {
-    this.movieServivce.getMovies().subscribe((resp) => {
+    this.movieServivce.getMovies().subscribe((resp: any) => {
       console.log(resp);
 
-      this.movies = resp;
+      this.movies = resp.results.slice(0, 3);
+      this.moviesDownloaded = true;
     });
   }
 }

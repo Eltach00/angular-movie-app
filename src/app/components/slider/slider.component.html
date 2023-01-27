@@ -1,0 +1,28 @@
+<div class="slider">
+  <div class="slide">
+    <div class="slide-bg">
+      <img
+        class="slide-bg-img"
+        [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+        alt=""
+      />
+    </div>
+    <div class="slide-pane">
+      <h2 class="name">{{ movie.title }}</h2>
+      <div class="meta">
+        <div class="info">
+          <span class="rating">
+            <span class="app-icon">star</span>
+            <span class="rating-value"> {{ movie.vote_average }} </span>
+            <span>/10</span>
+          </span>
+          <span> {{ movie.vote_count }} reviews</span>
+          <span> {{ movie.release_date | date : "Y" }}</span>
+        </div>
+      </div>
+      <div class="desc mt-6">
+        {{ movie.overview }}
+      </div>
+    </div>
+  </div>
+</div>
