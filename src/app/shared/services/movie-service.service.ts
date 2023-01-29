@@ -10,7 +10,7 @@ export class MovieService {
   constructor(private http: HttpClient) {}
 
   getMovies() {
-    return this.http.get(env.MOVIES_POPULAR, {
+    return this.http.get(env.MOVIES_UPCOMING, {
       params: {
         api_key: API_KEY,
       },
