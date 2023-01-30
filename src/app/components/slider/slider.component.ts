@@ -6,6 +6,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import imageSizess from 'src/app/constants/image-sizess';
 import { Imovie } from 'src/app/models/Imovie';
 
 @Component({
@@ -27,6 +28,7 @@ import { Imovie } from 'src/app/models/Imovie';
 export class SliderComponent implements OnInit {
   @Input() movies: Imovie[] = null;
   currentIndex = 0;
+  imageSize = imageSizess.LARGE_SIZE;
 
   ngOnInit(): void {
     setInterval(() => {

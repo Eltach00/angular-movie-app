@@ -14,3 +14,10 @@ export interface Imovie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface ImovieDto {
+  page: number;
+  results: Imovie[];
+  total_results: number;
+  total_pages: number;
+}

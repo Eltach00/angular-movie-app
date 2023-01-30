@@ -4,7 +4,7 @@
       <div class="slide-bg">
         <img
           class="slide-bg-img"
-          [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+          [src]="imageSize + movie.poster_path"
           alt=""
         />
       </div>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="desc mt-6">
-          {{ movie.overview }}
+          {{ movie.overview.slice(0, 255).concat("...") }}
         </div>
       </div>
     </div>

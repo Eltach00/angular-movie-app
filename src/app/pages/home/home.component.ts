@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Imovie } from 'src/app/models/Imovie';
+import { forkJoin } from 'rxjs';
+import { Imovie, ImovieDto } from 'src/app/models/Imovie';
 import { MovieService } from 'src/app/shared/services/movie-service.service';
 
 @Component({
@@ -12,27 +13,44 @@ export class HomeComponent implements OnInit {
   upcomingMovies: Imovie[] = [];
   trendingMovies: Imovie[] = [];
   trendingTvShows: Imovie[] = [];
-  moviesDownloaded = true;
+  moviesDownloaded = false;
   constructor(private movieServivce: MovieService) {}
 
   ngOnInit(): void {
-    this.movieServivce.getMovies('MOVIES_POPULAR').subscribe((resp: any) => {
-      this.popularMovies = resp.results.slice(0, 3);
-      this.moviesDownloaded = false;
-    });
-    this.movieServivce.getMovies('MOVIES_UPCOMING').subscribe((resp: any) => {
-      this.upcomingMovies = resp.results.slice(0, 3);
-      this.moviesDownloaded = false;
-    });
-    this.movieServivce
-      .getMovies('TRENDING_MOVIE_DAY')
-      .subscribe((resp: any) => {
-        this.trendingMovies = resp.results.slice(0, 6);
-        this.moviesDownloaded = false;
-      });
-    this.movieServivce.getMovies('TRENDING_TV').subscribe((resp: any) => {
-      this.trendingTvShows = resp.results.slice(0, 6);
-      this.moviesDownloaded = false;
+    forkJoin([
+      this.movieServivce.getMovies('MOVIES_POPULAR', 6),
+      this.movieServivce.getMovies('MOVIES_UPCOMING', 6),
+      this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 6),
+      this.movieServivce.getTv('TRENDING_TV', 6),
+    ]).subscribe((resp: Imovie[][]) => {
+      this.popularMovies = resp[0];
+      this.upcomingMovies = resp[1];
+      this.trendingMovies = resp[2];
+      this.trendingTvShows = resp[3];
+      this.moviesDownloaded = true;
     });
   }
+  //   this.movieServivce
+  //     .getMovies('MOVIES_POPULAR')
+  //     .subscribe((resp: Imovie[]) => {
+  //       this.popularMovies = resp.slice(0, 3);
+  //       this.moviesDownloaded = false;
+  //     });
+  //   this.movieServivce
+  //     .getMovies('MOVIES_UPCOMING')
+  //     .subscribe((resp: Imovie[]) => {
+  //       this.upcomingMovies = resp.slice(0, 3);
+  //       this.moviesDownloaded = false;
+  //     });
+  //   this.movieServivce
+  //     .getMovies('TRENDING_MOVIE_DAY')
+  //     .subscribe((resp: Imovie[]) => {
+  //       this.trendingMovies = resp.slice(0, 6);
+  //       this.moviesDownloaded = false;
+  //     });
+  //   this.movieServivce.getMovies('TRENDING_TV').subscribe((resp: Imovie[]) => {
+  //     this.trendingTvShows = resp.slice(0, 6);
+  //     this.moviesDownloaded = false;
+  //   });
+  // }
 }

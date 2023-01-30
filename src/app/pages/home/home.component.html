@@ -1,4 +1,4 @@
-<div *ngIf="moviesDownloaded" class="text-center">Loading...</div>
+<div *ngIf="!moviesDownloaded" class="text-center">Loading...</div>
 <slider [movies]="popularMovies"></slider>
 <items-banner [movies]="trendingMovies">
   <h2>Trending Movies</h2>
