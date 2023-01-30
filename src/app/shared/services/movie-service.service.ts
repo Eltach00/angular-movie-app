@@ -25,6 +25,13 @@ export class MovieService {
         })
       );
   }
+  getMovie(id: string) {
+    return this.http.get(env['MOVIE'] + id, {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+  }
   getTv(tvType: string = 'TRENDING_TV', count: number = 20) {
     return this.http
       .get<ImovieDto>(env[tvType], {
@@ -39,9 +46,9 @@ export class MovieService {
       );
   }
 
-  getSearch(movieType: string = 'MOVIES_POPULAR', page: string) {
+  getSearch(page: string) {
     return this.http
-      .get<ImovieDto>(env[movieType], {
+      .get<ImovieDto>(env['MOVIES_POPULAR'], {
         params: {
           api_key: API_KEY,
           page,

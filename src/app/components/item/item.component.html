@@ -1,8 +1,8 @@
 <ng-container *ngIf="item">
-  <a class="movie-item">
+  <a [routerLink]="'/movie/' + item.id" class="movie-item">
     <div class="movie-item-rating">
       <i class="app-icon">star</i>
-      <span> {{ item.vote_average }} </span>/10
+      <span> {{ item.vote_average | number : "1.0-1" }} </span>/10
     </div>
     <div class="movie-item-image">
       <img [src]="imageSize + item.poster_path" alt="" />
