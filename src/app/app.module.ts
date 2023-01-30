@@ -12,7 +12,7 @@ import { TvshowsComponent } from './pages/tvshows/tvshows.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ItemsBannerComponent } from './components/items-banner/items-banner.component';
-import { ItemMovieComponent } from './components/item-movie/item-movie.component';
+import { ItemComponent } from './components/item/item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { ItemMovieComponent } from './components/item-movie/item-movie.component
     GenresComponent,
     SliderComponent,
     ItemsBannerComponent,
-    ItemMovieComponent,
+    ItemComponent,
   ],
   imports: [
     BrowserModule,

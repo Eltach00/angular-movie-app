@@ -9,8 +9,8 @@ import { env } from 'src/app/environment/env';
 export class MovieService {
   constructor(private http: HttpClient) {}
 
-  getMovies() {
-    return this.http.get(env.MOVIES_UPCOMING, {
+  getMovies(movieType: string) {
+    return this.http.get(env[movieType], {
       params: {
         api_key: API_KEY,
       },

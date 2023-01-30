@@ -1,3 +1,9 @@
-<slider [movies]="movies"></slider>
+<div *ngIf="moviesDownloaded" class="text-center">Loading...</div>
+<slider [movies]="popularMovies"></slider>
+<items-banner [movies]="trendingMovies">
+  <h2>Trending Movies</h2>
+</items-banner>
+<items-banner [movies]="trendingTvShows">
+  <h2>Trending TV Shows</h2>
+</items-banner>
 <items-banner></items-banner>
-<ng-template #loading> <div class="text-center">Loading...</div> </ng-template>
