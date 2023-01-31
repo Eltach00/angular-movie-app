@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import imageSizess from 'src/app/constants/image-sizess';
-import { Imovie } from 'src/app/models/Imovie';
+import { Imovie, IndividualMovie } from 'src/app/models/Imovie';
 
 @Component({
   selector: 'slider',
@@ -26,13 +26,16 @@ import { Imovie } from 'src/app/models/Imovie';
   ],
 })
 export class SliderComponent implements OnInit {
-  @Input() movies: Imovie[] = null;
+  @Input() movies: Imovie[];
+  @Input() isBanner = false;
   currentIndex = 0;
   imageSize = imageSizess.LARGE_SIZE;
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.currentIndex = ++this.currentIndex % this.movies.length;
-    }, 5000);
+    if (!this.isBanner) {
+      setInterval(() => {
+        this.currentIndex = ++this.currentIndex % this.movies.length;
+      }, 5000);
+    }
   }
 }

@@ -15,6 +15,10 @@ import { ItemsBannerComponent } from './components/items-banner/items-banner.com
 import { ItemComponent } from './components/item/item.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { MovieComponent } from './pages/movie/movie.component';
+import { TabViewModule } from 'primeng/tabview';
+import { VideoComponent } from './components/video/video.component';
+import { ImageModule } from 'primeng/image';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { MovieComponent } from './pages/movie/movie.component';
     ItemsBannerComponent,
     ItemComponent,
     MovieComponent,
+    VideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,9 @@ import { MovieComponent } from './pages/movie/movie.component';
     HttpClientModule,
     BrowserAnimationsModule,
     PaginatorModule,
+    TabViewModule,
+    ImageModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

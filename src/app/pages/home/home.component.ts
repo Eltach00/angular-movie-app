@@ -9,7 +9,7 @@ import { MovieService } from 'src/app/shared/services/movie-service.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  popularMovies: Imovie[] = [];
+  nowPlayingMovies: Imovie[] = [];
   upcomingMovies: Imovie[] = [];
   trendingMovies: Imovie[] = [];
   trendingTvShows: Imovie[] = [];
@@ -18,12 +18,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin([
-      this.movieServivce.getMovies('MOVIES_POPULAR', 6),
+      this.movieServivce.getMovies('MOVIES_NOW', 6),
       this.movieServivce.getMovies('MOVIES_UPCOMING', 6),
       this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 6),
       this.movieServivce.getTv('TRENDING_TV', 6),
     ]).subscribe((resp: Imovie[][]) => {
-      this.popularMovies = resp[0];
+      this.nowPlayingMovies = resp[0];
       this.upcomingMovies = resp[1];
       this.trendingMovies = resp[2];
       this.trendingTvShows = resp[3];
