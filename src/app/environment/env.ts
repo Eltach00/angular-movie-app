@@ -10,5 +10,6 @@ export const env = {
   GENRE: 'https://api.themoviedb.org/3/genre/movie/list',
   SEARCH: 'https://api.themoviedb.org/3/search/movie',
   TV_SHOWS: 'https://api.themoviedb.org/3/tv/popular',
+  TV_SHOWS_TOP: 'https://api.themoviedb.org/3/tv/top_rated',
   TV_SHOW: 'https://api.themoviedb.org/3/tv/',
 };

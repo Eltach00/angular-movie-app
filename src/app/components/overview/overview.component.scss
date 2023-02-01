@@ -1,0 +1,28 @@
+@import "../../../styles/colors";
+
+.overview {
+  line-height: 1.5;
+}
+
+.stats {
+  display: flex;
+  margin-bottom: 10px;
+  .label {
+    width: 150px;
+  }
+  .value {
+    color: $primaryColor;
+    a {
+      color: $primaryColor;
+    }
+
+    a:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+}
+
+.poster {
+  max-width: 100%;
+}

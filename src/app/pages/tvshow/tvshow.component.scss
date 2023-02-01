@@ -14,33 +14,3 @@
     }
   }
 }
-
-.poster {
-  max-width: 100%;
-}
-.overview {
-  line-height: 1.5;
-}
-
-.stats {
-  display: flex;
-  margin-bottom: 10px;
-  .label {
-    width: 150px;
-  }
-  .value {
-    color: #9fa8da;
-  }
-}
-
-.actor {
-  padding: 10px;
-  img {
-    width: 100%;
-  }
-  span {
-    display: block;
-    text-align: center;
-    margin: 10px 0;
-  }
-}

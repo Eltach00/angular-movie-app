@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Imovie } from 'src/app/models/Imovie';
+import { TvShow } from 'src/app/models/TvModels';
 
 @Component({
   selector: 'items-banner',
@@ -7,6 +8,6 @@ import { Imovie } from 'src/app/models/Imovie';
   styleUrls: ['./items-banner.component.scss'],
 })
 export class ItemsBannerComponent {
-  @Input() movies: Imovie[];
+  @Input() movies: (Imovie | TvShow)[];
   @Input() linkName: string;
 }

@@ -20,6 +20,13 @@ export interface TvShow {
   release_date?: string;
 }
 
+export interface ITvDto {
+  page: number;
+  results: TvShow[];
+  total_results: number;
+  total_pages: number;
+}
+
 export interface IndividualTvShow {
   poster_path: string;
   name: string;
@@ -29,6 +36,10 @@ export interface IndividualTvShow {
   popularity: number;
   origin_country: string[];
   genres: { id: number; name: string }[];
+  status: string;
+  title?: string;
+  release_date?: string;
+  revenue?: string;
 }
 
 export interface TvVideos {

@@ -3,6 +3,7 @@ import { forkJoin } from 'rxjs';
 import { Imovie, ImovieDto } from 'src/app/models/Imovie';
 import { TvShow } from 'src/app/models/TvModels';
 import { MovieService } from 'src/app/shared/services/movie-service.service';
+import { TvService } from 'src/app/shared/services/tv.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,20 @@ export class HomeComponent implements OnInit {
   nowPlayingMovies: Imovie[] = [];
   upcomingMovies: Imovie[] = [];
   trendingMovies: Imovie[] = [];
-  trendingTvShows: Imovie[] = [];
+  trendingTvShows: TvShow[] = [];
   moviesDownloaded = false;
-  constructor(private movieServivce: MovieService) {}
+  constructor(
+    private movieServivce: MovieService,
+    private tvService: TvService
+  ) {}
 
   ngOnInit(): void {
     forkJoin([
       this.movieServivce.getMovies('MOVIES_NOW', 6),
       this.movieServivce.getMovies('MOVIES_UPCOMING', 6),
       this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 6),
-      this.movieServivce.getTv('TRENDING_TV', 6),
-    ]).subscribe((resp: Imovie[][]) => {
+      this.tvService.getTvTrending(6),
+    ]).subscribe((resp: [Imovie[], Imovie[], Imovie[], TvShow[]]) => {
       this.nowPlayingMovies = resp[0];
       this.upcomingMovies = resp[1];
       this.trendingMovies = resp[2];

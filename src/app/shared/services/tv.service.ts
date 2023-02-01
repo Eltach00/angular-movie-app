@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, switchMap } from 'rxjs';
 import { API_KEY } from 'src/app/environment/api_key';
 import { env } from 'src/app/environment/env';
-import { ITvshowsResults, TvShow } from 'src/app/models/TvModels';
+import { ITvDto, ITvshowsResults, TvShow } from 'src/app/models/TvModels';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,23 @@ import { ITvshowsResults, TvShow } from 'src/app/models/TvModels';
 export class TvService {
   constructor(private http: HttpClient) {}
 
+  getTvTrending(count: number = 20) {
+    return this.http
+      .get<ITvDto>(env.TRENDING_TV, {
+        params: {
+          api_key: API_KEY,
+        },
+      })
+      .pipe(
+        switchMap((resp) => {
+          return of(resp.results.slice(0, count));
+        })
+      );
+  }
+
   getTvshows(): Observable<TvShow[]> {
     return this.http
-      .get<ITvshowsResults>(env.TV_SHOWS, {
+      .get<ITvshowsResults>(env.TV_SHOWS_TOP, {
         params: {
           api_key: API_KEY,
         },

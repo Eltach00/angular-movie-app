@@ -52,19 +52,6 @@ export class MovieService {
       },
     });
   }
-  getTv(tvType: string = 'TRENDING_TV', count: number = 20) {
-    return this.http
-      .get<ImovieDto>(env[tvType], {
-        params: {
-          api_key: API_KEY,
-        },
-      })
-      .pipe(
-        switchMap((resp) => {
-          return of(resp.results.slice(0, count));
-        })
-      );
-  }
 
   getSearch(page: string) {
     return this.http

@@ -22,6 +22,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { InputTextModule } from 'primeng/inputtext';
 import { SearchPipe } from './pipes/search.pipe';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
+import { CredtsComponent } from './components/credts/credts.component';
+import { OverviewComponent } from './components/overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { TvshowComponent } from './pages/tvshow/tvshow.component';
     VideoComponent,
     SearchPipe,
     TvshowComponent,
+    CredtsComponent,
+    OverviewComponent,
   ],
   imports: [
     BrowserModule,

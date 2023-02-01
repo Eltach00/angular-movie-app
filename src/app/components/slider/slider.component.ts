@@ -28,13 +28,12 @@ import { IndividualTvShow, TvShow } from 'src/app/models/TvModels';
 })
 export class SliderComponent implements OnInit {
   @Input() movies: any;
-  // IndividualTvShow[] | IndividualMovie[] | TvShow[] | Imovie[];
   @Input() isBanner = false;
   currentIndex = 0;
   imageSize = imageSizess.LARGE_SIZE;
 
   ngOnInit(): void {
-    if (!this.isBanner) {
+    if (this.isBanner) {
       setInterval(() => {
         this.currentIndex = ++this.currentIndex % this.movies.length;
       }, 5000);

@@ -140,4 +140,7 @@ export interface IndividualMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  name?: string;
+  first_air_date?: string;
+  origin_country?: string;
 }
