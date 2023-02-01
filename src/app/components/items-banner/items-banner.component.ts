@@ -8,4 +8,5 @@ import { Imovie } from 'src/app/models/Imovie';
 })
 export class ItemsBannerComponent {
   @Input() movies: Imovie[];
+  @Input() linkName: string;
 }

@@ -34,7 +34,21 @@ export class TvService {
   }
 
   getTvVideos(id: string) {
-    return this.http.get(env.TV_SHOW + id + '/vidoes', {
+    return this.http.get(env.TV_SHOW + id + '/videos', {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+  }
+  getTvCredits(id: string) {
+    return this.http.get(env.TV_SHOW + id + '/credits', {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+  }
+  getTvImages(id: string) {
+    return this.http.get(env.TV_SHOW + id + '/images', {
       params: {
         api_key: API_KEY,
       },

@@ -48,6 +48,18 @@
           </div>
         </div>
       </div>
+      <p-carousel [value]="credits.cast" [numVisible]="5" [numScroll]="2">
+        <ng-template let-actor pTemplate="item">
+          <div class="actor">
+            <img
+              class="poster"
+              [src]="imageSize.SMALL_SIZE + actor.profile_path"
+              [alt]="actor.name"
+            />
+            <span>{{ actor.name }}</span>
+          </div>
+        </ng-template>
+      </p-carousel>
     </p-tabPanel>
     <p-tabPanel header="Videos">
       <div class="grid">
@@ -80,16 +92,4 @@
       </div>
     </p-tabPanel>
   </p-tabView>
-  <p-carousel [value]="credits.cast" [numVisible]="5" [numScroll]="2">
-    <ng-template let-actor pTemplate="item">
-      <div class="actor">
-        <img
-          class="poster"
-          [src]="imageSize.SMALL_SIZE + actor.profile_path"
-          [alt]="actor.name"
-        />
-        <span>{{ actor.name }}</span>
-      </div>
-    </ng-template>
-  </p-carousel>
 </ng-container>

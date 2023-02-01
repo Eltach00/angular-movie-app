@@ -30,3 +30,22 @@ export interface IndividualTvShow {
   origin_country: string[];
   genres: { id: number; name: string }[];
 }
+
+export interface TvVideos {
+  id: string;
+  results: {
+    site: string;
+    key: string;
+  }[];
+}
+export interface TvPhotos {
+  backdrops: {
+    file_path: string;
+  }[];
+}
+export interface TvCredits {
+  cast: {
+    name: string;
+    profile_path: string | null;
+  }[];
+}

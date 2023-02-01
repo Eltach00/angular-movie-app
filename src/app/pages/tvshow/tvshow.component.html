@@ -45,12 +45,23 @@
           </div>
         </div>
       </div>
+      <p-carousel [value]="credits.cast" [numVisible]="5" [numScroll]="2">
+        <ng-template let-actor pTemplate="item">
+          <div class="actor">
+            <img
+              class="poster"
+              [src]="imageSize.SMALL_SIZE + actor.profile_path"
+              [alt]="actor.name"
+            />
+            <span>{{ actor.name }}</span>
+          </div>
+        </ng-template>
+      </p-carousel>
     </p-tabPanel>
     <p-tabPanel header="Videos">
-      <!--
       <div class="grid">
-        <ng-container *ngIf="movieVideos">
-          <ng-container *ngFor="let item of movieVideos.results.slice(0, 3)">
+        <ng-container *ngIf="tvVideos">
+          <ng-container *ngFor="let item of tvVideos.results.slice(0, 3)">
             <div class="col-12 md:col-4 lg:col-4">
               <app-video [key]="item.key" [site]="item.site"></app-video>
             </div>
@@ -60,8 +71,8 @@
     </p-tabPanel>
     <p-tabPanel header="Photos">
       <div class="grid">
-        <ng-container *ngIf="moviePhotos">
-          <ng-container *ngFor="let item of moviePhotos.backdrops">
+        <ng-container *ngIf="tvPhotos">
+          <ng-container *ngFor="let item of tvPhotos.backdrops">
             <div class="col-12 md:col-4 lg:col-4">
               <p-image
                 [src]="imageSize.MEDIUM_SIZE + item.file_path"
@@ -75,19 +86,7 @@
             </div>
           </ng-container>
         </ng-container>
-      </div>-->
+      </div>
     </p-tabPanel>
   </p-tabView>
-  <!-- <p-carousel [value]="credits.cast" [numVisible]="5" [numScroll]="2">
-    <ng-template let-actor pTemplate="item">
-      <div class="actor">
-        <img
-          class="poster"
-          [src]="imageSize.SMALL_SIZE + actor.profile_path"
-          [alt]="actor.name"
-        />
-        <span>{{ actor.name }}</span>
-      </div>
-    </ng-template>
-  </p-carousel> -->
 </ng-container>
