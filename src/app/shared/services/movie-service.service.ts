@@ -103,6 +103,22 @@ export class MovieService {
         })
       );
   }
+  getMoviesSearch(query: string, page: number) {
+    return this.http
+      .get<ImovieDto>(env.SEARCH, {
+        params: {
+          api_key: API_KEY,
+          query,
+          page,
+          language: 'en',
+        },
+      })
+      .pipe(
+        switchMap((resp) => {
+          return of(resp.results);
+        })
+      );
+  }
 
   getMovieCredits(id: string): Observable<Icredits> {
     return this.http.get<Icredits>(env['MOVIE'] + id + '/credits', {

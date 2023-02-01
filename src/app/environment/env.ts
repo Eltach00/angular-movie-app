@@ -8,4 +8,7 @@ export const env = {
   MOVIE: 'https://api.themoviedb.org/3/movie/',
   DISCOVER: 'https://api.themoviedb.org/3/discover/movie',
   GENRE: 'https://api.themoviedb.org/3/genre/movie/list',
+  SEARCH: 'https://api.themoviedb.org/3/search/movie',
+  TV_SHOWS: 'https://api.themoviedb.org/3/tv/popular',
+  TV_SHOW: 'https://api.themoviedb.org/3/tv/',
 };

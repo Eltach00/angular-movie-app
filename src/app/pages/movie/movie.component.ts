@@ -4,6 +4,7 @@ import { first, forkJoin } from 'rxjs';
 import imageSizess from 'src/app/constants/image-sizess';
 import {
   Icredits,
+  Imovie,
   IndividualMovie,
   Iphotos,
   Ivideos,
@@ -16,7 +17,7 @@ import { MovieService } from 'src/app/shared/services/movie-service.service';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit, OnDestroy {
-  movie: any;
+  movie: IndividualMovie;
   movieVideos: Ivideos;
   moviePhotos: Iphotos;
   imageSize = imageSizess;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Imovie, ImovieDto } from 'src/app/models/Imovie';
+import { TvShow } from 'src/app/models/TvModels';
 import { MovieService } from 'src/app/shared/services/movie-service.service';
 
 @Component({

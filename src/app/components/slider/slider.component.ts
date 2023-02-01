@@ -8,6 +8,7 @@ import {
 import { Component, Input, OnInit } from '@angular/core';
 import imageSizess from 'src/app/constants/image-sizess';
 import { Imovie, IndividualMovie } from 'src/app/models/Imovie';
+import { IndividualTvShow, TvShow } from 'src/app/models/TvModels';
 
 @Component({
   selector: 'slider',
@@ -26,7 +27,8 @@ import { Imovie, IndividualMovie } from 'src/app/models/Imovie';
   ],
 })
 export class SliderComponent implements OnInit {
-  @Input() movies: Imovie[];
+  @Input() movies: any;
+  // IndividualTvShow[] | IndividualMovie[] | TvShow[] | Imovie[];
   @Input() isBanner = false;
   currentIndex = 0;
   imageSize = imageSizess.LARGE_SIZE;

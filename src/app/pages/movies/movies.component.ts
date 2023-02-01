@@ -17,9 +17,11 @@ type paginateEvent = {
   styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
-  popularMovies: Imovie[] = [];
+  moviesList: Imovie[] = [];
   genreId: string | null;
   downloaded = false;
+  term = '';
+  linkName = '/movie/';
 
   constructor(
     private movieService: MovieService,
@@ -38,10 +40,15 @@ export class MoviesComponent implements OnInit {
         }
       });
   }
+  searchMovie(value: string, page = 1) {
+    this.movieService.getMoviesSearch(value, page).subscribe((resp) => {
+      this.moviesList = resp;
+    });
+  }
 
   getPaginatePages(page: number) {
     this.movieService.getSearch(page.toString()).subscribe((resp) => {
-      this.popularMovies = resp;
+      this.moviesList = resp;
       this.downloaded = true;
     });
   }
@@ -50,13 +57,15 @@ export class MoviesComponent implements OnInit {
     this.movieService
       .getMoviesDiscover(genreId, page)
       .subscribe((resp: Imovie[]) => {
-        this.popularMovies = resp;
+        this.moviesList = resp;
         this.downloaded = true;
       });
   }
   paginate(event: paginateEvent) {
     const pageNumber = event.page + 1;
-    if (this.genreId) {
+    if (this.term) {
+      this.searchMovie(this.term, pageNumber);
+    } else if (this.genreId) {
       this.getMoviesByGenre(this.genreId, pageNumber);
     } else {
       this.getPaginatePages(pageNumber);
