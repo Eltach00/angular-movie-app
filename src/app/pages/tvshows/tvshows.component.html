@@ -1,4 +1,5 @@
 <div *ngIf="!downloaded" class="text-center">Loading...</div>
+
 <div class="inputBar p-fluid">
   <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
@@ -23,6 +24,6 @@
 </div>
 <p-paginator
   [rows]="20"
-  [totalRecords]="10000"
+  [totalRecords]="2745"
   (onPageChange)="paginate($event)"
 ></p-paginator>

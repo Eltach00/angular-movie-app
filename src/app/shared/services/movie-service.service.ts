@@ -77,7 +77,7 @@ export class MovieService {
 
   getMoviesDiscover(genreId: string, page: number) {
     return this.http
-      .get<ImovieDto>(env.DISCOVER, {
+      .get<ImovieDto>(env.DISCOVER_MOVIE, {
         params: {
           api_key: API_KEY,
           with_genres: genreId,
@@ -92,7 +92,7 @@ export class MovieService {
   }
   getMoviesSearch(query: string, page: number) {
     return this.http
-      .get<ImovieDto>(env.SEARCH, {
+      .get<ImovieDto>(env.SEARCH_MOVIE, {
         params: {
           api_key: API_KEY,
           query,

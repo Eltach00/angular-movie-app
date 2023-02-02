@@ -12,13 +12,32 @@ export class TvshowsComponent implements OnInit {
   tvList: TvShow[];
   term = '';
   linkName = '/tvshow/';
+
   constructor(private tvService: TvService) {}
   ngOnInit(): void {
-    this.tvService.getTvshows().subscribe((resp: TvShow[]) => {
+    this.getPage(1);
+  }
+  getPage(page: number) {
+    this.tvService.getTvshows(page).subscribe((resp: TvShow[]) => {
       this.tvList = resp;
       this.downloaded = true;
     });
   }
-  paginate(event) {}
-  searchMovie(term: string) {}
+  paginate(event) {
+    const pageNumber = event.page + 1;
+    if (this.term) {
+      this.searchMovie(this.term, pageNumber);
+    } else {
+      this.getPage(pageNumber);
+    }
+  }
+  searchMovie(term: string, page?: number) {
+    if (!term) {
+      this.getPage(1);
+    } else {
+      this.tvService.getTvSearch(term, page).subscribe((resp: TvShow[]) => {
+        this.tvList = resp;
+      });
+    }
+  }
 }

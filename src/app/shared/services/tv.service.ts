@@ -11,6 +11,22 @@ import { ITvDto, ITvshowsResults, TvShow } from 'src/app/models/TvModels';
 export class TvService {
   constructor(private http: HttpClient) {}
 
+  getTvAnimation(count = 10) {
+    return this.http
+      .get<ITvshowsResults>(env.DISCOVER_TV, {
+        params: {
+          api_key: API_KEY,
+          with_genres: 16,
+          with_original_language: 'ja',
+        },
+      })
+      .pipe(
+        switchMap((resp) => {
+          return of(resp.results.slice(0, count));
+        })
+      );
+  }
+
   getTvTrending(count: number = 20) {
     return this.http
       .get<ITvDto>(env.TRENDING_TV, {
@@ -25,11 +41,28 @@ export class TvService {
       );
   }
 
-  getTvshows(): Observable<TvShow[]> {
+  getTvshows(page): Observable<TvShow[]> {
     return this.http
       .get<ITvshowsResults>(env.TV_SHOWS_TOP, {
         params: {
           api_key: API_KEY,
+          page,
+        },
+      })
+      .pipe(
+        switchMap((resp: ITvshowsResults) => {
+          return of(resp.results);
+        })
+      );
+  }
+
+  getTvSearch(query: string, page: number): Observable<TvShow[]> {
+    return this.http
+      .get<ITvshowsResults>(env.SEARCH_TV, {
+        params: {
+          api_key: API_KEY,
+          page,
+          query,
         },
       })
       .pipe(

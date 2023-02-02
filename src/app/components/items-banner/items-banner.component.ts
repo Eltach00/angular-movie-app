@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import imageSizess from 'src/app/constants/image-sizess';
 import { Imovie } from 'src/app/models/Imovie';
 import { TvShow } from 'src/app/models/TvModels';
 
@@ -10,4 +11,5 @@ import { TvShow } from 'src/app/models/TvModels';
 export class ItemsBannerComponent {
   @Input() movies: (Imovie | TvShow)[];
   @Input() linkName: string;
+  imageSize = imageSizess;
 }

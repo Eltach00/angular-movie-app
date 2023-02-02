@@ -41,9 +41,13 @@ export class MoviesComponent implements OnInit {
       });
   }
   searchMovie(value: string, page = 1) {
-    this.movieService.getMoviesSearch(value, page).subscribe((resp) => {
-      this.moviesList = resp;
-    });
+    if (!this.term) {
+      this.getPaginatePages(page);
+    } else {
+      this.movieService.getMoviesSearch(value, page).subscribe((resp) => {
+        this.moviesList = resp;
+      });
+    }
   }
 
   getPaginatePages(page: number) {

@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   upcomingMovies: Imovie[] = [];
   trendingMovies: Imovie[] = [];
   trendingTvShows: TvShow[] = [];
+  tvAnimation: TvShow[] = [];
   moviesDownloaded = false;
   constructor(
     private movieServivce: MovieService,
@@ -23,15 +24,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin([
-      this.movieServivce.getMovies('MOVIES_NOW', 6),
-      this.movieServivce.getMovies('MOVIES_UPCOMING', 6),
-      this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 6),
-      this.tvService.getTvTrending(6),
-    ]).subscribe((resp: [Imovie[], Imovie[], Imovie[], TvShow[]]) => {
+      this.movieServivce.getMovies('MOVIES_NOW', 12),
+      this.movieServivce.getMovies('MOVIES_UPCOMING', 12),
+      this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 12),
+      this.tvService.getTvTrending(12),
+      this.tvService.getTvAnimation(12),
+    ]).subscribe((resp: [Imovie[], Imovie[], Imovie[], TvShow[], TvShow[]]) => {
       this.nowPlayingMovies = resp[0];
       this.upcomingMovies = resp[1];
       this.trendingMovies = resp[2];
       this.trendingTvShows = resp[3];
+      this.tvAnimation = resp[4];
       this.moviesDownloaded = true;
     });
   }
