@@ -3,14 +3,16 @@
 <div class="inputBar p-fluid">
   <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input
-      type="text"
-      pInputText
-      [(ngModel)]="term"
-      placeholder="Search"
-      class="p-inputtext-sm"
-      (keyup)="searchTv2(term)"
-    />
+    <form [formGroup]="inputForm">
+      <input
+        formControlName="inp"
+        type="text"
+        pInputText
+        [(ngModel)]="term"
+        placeholder="Search"
+        class="p-inputtext-sm"
+      />
+    </form>
   </span>
 </div>
 <div class="container">

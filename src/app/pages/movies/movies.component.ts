@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, take } from 'rxjs';
+import { debounceTime, take } from 'rxjs';
 import { Imovie } from 'src/app/models/Imovie';
 import { MovieService } from 'src/app/shared/services/movie-service.service';
 
@@ -29,13 +29,10 @@ export class MoviesComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute
-  ) {
-    this.inputForm = new FormGroup({
-      inp: new FormControl(''),
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.createForm();
     this.route.params
       .pipe(take(1))
       .subscribe(({ genreId }: { genreId: string }) => {
@@ -47,42 +44,34 @@ export class MoviesComponent implements OnInit {
         }
       });
   }
-  searchMovie(page = 1) {
-    this.inputForm.controls['inp'].valueChanges
-      .pipe(debounceTime(1000))
-      .subscribe((resp) => {
-        if (!resp) {
-          this.getPaginatePages(page);
-        } else {
-          this.movieService.getMoviesSearch(resp, page).subscribe((resp) => {
-            this.moviesList = resp;
-          });
-        }
-      });
-
-    // if (!this.term) {
-    //   this.getPaginatePages(page);
-    // } else {
-    //   this.movieService.getMoviesSearch(value, page).subscribe((resp) => {
-    //     this.moviesList = resp;
-    //   });
-    // }
+  createForm() {
+    this.inputForm = new FormGroup({
+      inp: new FormControl(''),
+    });
+    if (this.term) {
+      this.inputForm.controls['inp'].valueChanges
+        .pipe(debounceTime(1000))
+        .subscribe((resp) => {
+          if (!resp) {
+            this.getPaginatePages(1);
+          } else {
+            this.movieService.getMoviesSearch(resp, 1).subscribe((resp) => {
+              this.moviesList = resp;
+            });
+          }
+        });
+    }
   }
 
-  // searchMovie2(event?, value?: string, page = 1) {
-  //   if (this.timerId) {
-  //     clearTimeout(this.timerId);
-  //     this.timerId = setTimeout(() => {
-  //       this.timeoutHandler(term, page);
-  //       clearTimeout(this.timerId);
-  //     }, 500);
-  //   } else {
-  //     this.timerId = setTimeout(() => {
-  //       this.timeoutHandler(term, page);
-  //       clearTimeout(this.timerId);
-  //     }, 500);
-  //   }
-  // }
+  searchMovie(page = 1) {
+    if (!this.term) {
+      this.getPaginatePages(page);
+    } else {
+      this.movieService.getMoviesSearch(this.term, page).subscribe((resp) => {
+        this.moviesList = resp;
+      });
+    }
+  }
 
   // timeoutHandler(term, page?) {
   //   if (!this.term) {
@@ -109,6 +98,7 @@ export class MoviesComponent implements OnInit {
         this.downloaded = true;
       });
   }
+
   paginate(event: paginateEvent) {
     const pageNumber = event.page + 1;
     if (this.term) {

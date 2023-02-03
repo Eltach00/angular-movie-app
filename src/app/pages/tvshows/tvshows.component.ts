@@ -1,5 +1,7 @@
 import { TypeModifier } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 import { TvShow } from 'src/app/models/TvModels';
 import { TvService } from 'src/app/shared/services/tv.service';
 
@@ -13,11 +15,13 @@ export class TvshowsComponent implements OnInit {
   tvList: TvShow[];
   term = '';
   linkName = '/tvshow/';
-  timerId;
+  // timerId;
+  inputForm: FormGroup;
   @ViewChild('inputText', { static: false }) inputText: ElementRef | undefined;
 
   constructor(private tvService: TvService) {}
   ngOnInit(): void {
+    this.createForm();
     this.getPage(1);
   }
   getPage(page: number) {
@@ -34,41 +38,59 @@ export class TvshowsComponent implements OnInit {
       this.getPage(pageNumber);
     }
   }
-  searchTv(term: string, page?: number) {
-    if (!term) {
-      this.getPage(1);
-    } else {
-      this.tvService.getTvSearch(term, page).subscribe((resp: TvShow[]) => {
-        this.tvList = resp;
-      });
+
+  searchTv(term, page) {
+    this.tvService.getTvSearch(term, page).subscribe((resp: TvShow[]) => {
+      this.tvList = resp;
+    });
+  }
+
+  createForm() {
+    this.inputForm = new FormGroup({
+      inp: new FormControl(''),
+    });
+    if (this.term) {
+      this.inputForm.controls['inp'].valueChanges
+        .pipe(debounceTime(500))
+        .subscribe((resp) => {
+          if (!this.term) {
+            this.getPage(1);
+          } else {
+            this.tvService
+              .getTvSearch(this.term, 1)
+              .subscribe((resp: TvShow[]) => {
+                this.tvList = resp;
+              });
+          }
+        });
     }
   }
 
-  searchTv2(term, page?) {
-    if (this.timerId) {
-      clearTimeout(this.timerId);
+  // searchTv2(term, page?) {
+  //   if (this.timerId) {
+  //     clearTimeout(this.timerId);
 
-      this.timerId = setTimeout(() => {
-        this.timeoutHandler(term, page);
+  //     this.timerId = setTimeout(() => {
+  //       this.timeoutHandler(term, page);
 
-        clearTimeout(this.timerId);
-      }, 500);
-    } else {
-      this.timerId = setTimeout(() => {
-        this.timeoutHandler(term, page);
+  //       clearTimeout(this.timerId);
+  //     }, 500);
+  //   } else {
+  //     this.timerId = setTimeout(() => {
+  //       this.timeoutHandler(term, page);
 
-        clearTimeout(this.timerId);
-      }, 500);
-    }
-  }
+  //       clearTimeout(this.timerId);
+  //     }, 500);
+  //   }
+  // }
 
-  timeoutHandler(term, page?) {
-    if (!term) {
-      this.getPage(1);
-    } else {
-      this.tvService.getTvSearch(term, page).subscribe((resp: TvShow[]) => {
-        this.tvList = resp;
-      });
-    }
-  }
+  // timeoutHandler(term, page?) {
+  //   if (!term) {
+  //     this.getPage(1);
+  //   } else {
+  //     this.tvService.getTvSearch(term, page).subscribe((resp: TvShow[]) => {
+  //       this.tvList = resp;
+  //     });
+  //   }
+  // }
 }
