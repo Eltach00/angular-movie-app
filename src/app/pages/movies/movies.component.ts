@@ -21,10 +21,9 @@ export class MoviesComponent implements OnInit {
   moviesList: Imovie[] = [];
   genreId: string | null;
   downloaded = false;
-  term = '';
   linkName = '/movie/';
   inputForm: FormGroup;
-  timerId;
+  // timerId;
 
   constructor(
     private movieService: MovieService,
@@ -33,6 +32,7 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
     this.route.params
       .pipe(take(1))
       .subscribe(({ genreId }: { genreId: string }) => {
@@ -48,26 +48,25 @@ export class MoviesComponent implements OnInit {
     this.inputForm = new FormGroup({
       inp: new FormControl(''),
     });
-    if (this.term) {
-      this.inputForm.controls['inp'].valueChanges
-        .pipe(debounceTime(1000))
-        .subscribe((resp) => {
-          if (!resp) {
-            this.getPaginatePages(1);
-          } else {
-            this.movieService.getMoviesSearch(resp, 1).subscribe((resp) => {
-              this.moviesList = resp;
-            });
-          }
-        });
-    }
+    this.inputForm.controls['inp'].valueChanges
+      .pipe(debounceTime(1000))
+      .subscribe((resp) => {
+        if (!resp) {
+          this.getPaginatePages(1);
+        } else {
+          this.movieService.getMoviesSearch(resp, 1).subscribe((resp) => {
+            this.moviesList = resp;
+          });
+        }
+      });
   }
 
   searchMovie(page = 1) {
-    if (!this.term) {
+    const term = this.inputForm.controls['inp'].value;
+    if (!term) {
       this.getPaginatePages(page);
     } else {
-      this.movieService.getMoviesSearch(this.term, page).subscribe((resp) => {
+      this.movieService.getMoviesSearch(term, page).subscribe((resp) => {
         this.moviesList = resp;
       });
     }
@@ -101,7 +100,9 @@ export class MoviesComponent implements OnInit {
 
   paginate(event: paginateEvent) {
     const pageNumber = event.page + 1;
-    if (this.term) {
+    console.log(this.inputForm.controls['inp'].value);
+
+    if (this.inputForm.controls['inp'].value) {
       this.searchMovie(pageNumber);
     } else if (this.genreId) {
       this.getMoviesByGenre(this.genreId, pageNumber);

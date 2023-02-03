@@ -22,7 +22,6 @@ export class TvshowsComponent implements OnInit {
   constructor(private tvService: TvService) {}
   ngOnInit(): void {
     this.createForm();
-    this.getPage(1);
   }
   getPage(page: number) {
     this.tvService.getTvshows(page).subscribe((resp: TvShow[]) => {
@@ -32,8 +31,9 @@ export class TvshowsComponent implements OnInit {
   }
   paginate(event) {
     const pageNumber = event.page + 1;
-    if (this.term) {
-      this.searchTv(this.term, pageNumber);
+    const term = this.inputForm.controls['inp'].value;
+    if (term) {
+      this.searchTv(term, pageNumber);
     } else {
       this.getPage(pageNumber);
     }
@@ -49,21 +49,18 @@ export class TvshowsComponent implements OnInit {
     this.inputForm = new FormGroup({
       inp: new FormControl(''),
     });
-    if (this.term) {
-      this.inputForm.controls['inp'].valueChanges
-        .pipe(debounceTime(500))
-        .subscribe((resp) => {
-          if (!this.term) {
-            this.getPage(1);
-          } else {
-            this.tvService
-              .getTvSearch(this.term, 1)
-              .subscribe((resp: TvShow[]) => {
-                this.tvList = resp;
-              });
-          }
-        });
-    }
+
+    this.inputForm.controls['inp'].valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((resp) => {
+        if (!resp) {
+          this.getPage(1);
+        } else {
+          this.tvService.getTvSearch(resp, 1).subscribe((resp: TvShow[]) => {
+            this.tvList = resp;
+          });
+        }
+      });
   }
 
   // searchTv2(term, page?) {
