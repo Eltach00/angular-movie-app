@@ -1,5 +1,5 @@
 <div *ngIf="!moviesDownloaded" class="text-center">Loading...</div>
-<slider [movies]="tvAnimation" [isBanner]="true"></slider>
+<slider [movies]="tvAnimation.slice(0, 6)" [isBanner]="true"></slider>
 <items-banner linkName="tvshow/" [movies]="tvAnimation">
   <h2>Anime</h2>
 </items-banner>

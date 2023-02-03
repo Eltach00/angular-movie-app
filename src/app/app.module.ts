@@ -24,6 +24,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
 import { CredtsComponent } from './components/credts/credts.component';
 import { OverviewComponent } from './components/overview/overview.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { OverviewComponent } from './components/overview/overview.component';
     ImageModule,
     CarouselModule,
     InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
