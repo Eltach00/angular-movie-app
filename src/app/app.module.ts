@@ -25,6 +25,7 @@ import { TvshowComponent } from './pages/tvshow/tvshow.component';
 import { CredtsComponent } from './components/credts/credts.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestModule } from './appTest.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MoviesComponent,
     TvshowsComponent,
     GenresComponent,
-    SliderComponent,
     ItemsBannerComponent,
     ItemComponent,
     MovieComponent,
@@ -57,6 +57,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
+    TestModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

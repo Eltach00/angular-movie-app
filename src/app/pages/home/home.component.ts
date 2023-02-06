@@ -11,8 +11,8 @@ import { TvService } from 'src/app/shared/services/tv.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  nowPlayingMovies: Imovie[] = [];
-  upcomingMovies: Imovie[] = [];
+  // nowPlayingMovies: Imovie[] = [];
+  // upcomingMovies: Imovie[] = [];
   trendingMovies: Imovie[] = [];
   trendingTvShows: TvShow[] = [];
   tvAnimation: TvShow[] = [];
@@ -24,20 +24,35 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin([
-      this.movieServivce.getMovies('MOVIES_NOW', 12),
-      this.movieServivce.getMovies('MOVIES_UPCOMING', 12),
+      // this.movieServivce.getMovies('MOVIES_NOW', 12),
+      // this.movieServivce.getMovies('MOVIES_UPCOMING', 12),
       this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 12),
       this.tvService.getTvTrending(12),
       this.tvService.getTvAnimation(12),
-    ]).subscribe((resp: [Imovie[], Imovie[], Imovie[], TvShow[], TvShow[]]) => {
-      this.nowPlayingMovies = resp[0];
-      this.upcomingMovies = resp[1];
-      this.trendingMovies = resp[2];
-      this.trendingTvShows = resp[3];
-      this.tvAnimation = resp[4];
+    ]).subscribe((resp: [Imovie[], TvShow[], TvShow[]]) => {
+      // this.nowPlayingMovies = resp[0];
+      // this.upcomingMovies = resp[1];
+      this.trendingMovies = resp[0];
+      this.trendingTvShows = resp[1];
+      this.tvAnimation = resp[2];
       this.moviesDownloaded = true;
     });
   }
+
+  handleRemoveAnime(event) {
+    this.tvAnimation = this.tvAnimation.filter((item) => item.id != event.id);
+  }
+  handleRemoveMovies(event) {
+    this.trendingMovies = this.trendingMovies.filter(
+      (item) => item.id != event.id
+    );
+  }
+  handleRemoveTvShows(event) {
+    this.trendingTvShows = this.trendingTvShows.filter(
+      (item) => item.id != event.id
+    );
+  }
+
   //   this.movieServivce
   //     .getMovies('MOVIES_POPULAR')
   //     .subscribe((resp: Imovie[]) => {

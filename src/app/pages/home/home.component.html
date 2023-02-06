@@ -1,11 +1,23 @@
 <div *ngIf="!moviesDownloaded" class="text-center">Loading...</div>
 <slider [movies]="tvAnimation.slice(0, 6)" [isBanner]="true"></slider>
-<items-banner linkName="tvshow/" [movies]="tvAnimation">
+<items-banner
+  (handleRemove)="handleRemoveAnime($event)"
+  linkName="tvshow/"
+  [movies]="tvAnimation"
+>
   <h2>Anime</h2>
 </items-banner>
-<items-banner linkName="movie/" [movies]="trendingMovies">
+<items-banner
+  (handleRemove)="handleRemoveMovies($event)"
+  linkName="movie/"
+  [movies]="trendingMovies"
+>
   <h2>Trending Movies</h2>
 </items-banner>
-<items-banner linkName="tvshow/" [movies]="trendingTvShows">
+<items-banner
+  (handleRemove)="handleRemoveTvShows($event)"
+  linkName="tvshow/"
+  [movies]="trendingTvShows"
+>
   <h2>Trending TV Shows</h2>
 </items-banner>

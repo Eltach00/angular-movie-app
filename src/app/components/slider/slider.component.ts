@@ -5,10 +5,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import imageSizess from 'src/app/constants/image-sizess';
-import { Imovie, IndividualMovie } from 'src/app/models/Imovie';
-import { IndividualTvShow, TvShow } from 'src/app/models/TvModels';
 
 @Component({
   selector: 'slider',

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Imovie } from 'src/app/models/Imovie';
 import imageSizes from '../../constants/image-sizess';
 import { TvShow } from 'src/app/models/TvModels';
@@ -11,6 +11,9 @@ import { TvShow } from 'src/app/models/TvModels';
 export class ItemComponent {
   @Input() item: Imovie | TvShow;
   @Input() linkName: string;
-
+  @Output() clickBtn = new EventEmitter();
+  onClick() {
+    this.clickBtn.emit(this.item);
+  }
   imageSize = imageSizes.MEDIUM_SIZE;
 }

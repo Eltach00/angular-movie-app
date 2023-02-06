@@ -100,7 +100,6 @@ export class MoviesComponent implements OnInit {
 
   paginate(event: paginateEvent) {
     const pageNumber = event.page + 1;
-    console.log(this.inputForm.controls['inp'].value);
 
     if (this.inputForm.controls['inp'].value) {
       this.searchMovie(pageNumber);
