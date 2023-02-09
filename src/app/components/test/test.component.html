@@ -1,0 +1,25 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 20px;
+  "
+>
+  <app-auth-form (submited)="loginUser($event)">
+    <h3>Create login</h3>
+    <app-remember (checked)="changeRemember($event)"></app-remember>
+    <button>Sign up</button>
+  </app-auth-form>
+  <div>
+    <label for="creditCard">
+      <input
+        type="text"
+        name="creditCard"
+        placeholder="Enter your 16-digit card number"
+        creditCard
+      />
+    </label>
+  </div>
+</div>

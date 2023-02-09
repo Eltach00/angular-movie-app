@@ -44,6 +44,7 @@ import { TestModule } from './appTest.module';
     TvshowComponent,
     CredtsComponent,
     OverviewComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,
