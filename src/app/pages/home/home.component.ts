@@ -29,14 +29,19 @@ export class HomeComponent implements OnInit {
       this.movieServivce.getMovies('TRENDING_MOVIE_DAY', 12),
       this.tvService.getTvTrending(12),
       this.tvService.getTvAnimation(12),
-    ]).subscribe((resp: [Imovie[], TvShow[], TvShow[]]) => {
-      // this.nowPlayingMovies = resp[0];
-      // this.upcomingMovies = resp[1];
-      this.trendingMovies = resp[0];
-      this.trendingTvShows = resp[1];
-      this.tvAnimation = resp[2];
-      this.moviesDownloaded = true;
-    });
+    ]).subscribe(
+      (resp: [Imovie[], TvShow[], TvShow[]]) => {
+        // this.nowPlayingMovies = resp[0];
+        // this.upcomingMovies = resp[1];
+        this.trendingMovies = resp[0];
+        this.trendingTvShows = resp[1];
+        this.tvAnimation = resp[2];
+        this.moviesDownloaded = true;
+      },
+      (err) => {
+        console.log('Http Error:', err);
+      }
+    );
   }
 
   handleRemoveAnime(event) {
