@@ -1,0 +1,9 @@
+<div>
+  <form [formGroup]="myForm" (submit)="onSubmit()">
+    <ng-content select="h3"></ng-content>
+    <input formControlName="inp" type="text" style="display: block" #inputS />
+    <ng-content select="app-remember"></ng-content>
+    <div *ngIf="showMessage">You'll be logged for 30 days</div>
+    <ng-content select="button"></ng-content>
+  </form>
+</div>
