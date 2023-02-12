@@ -1,4 +1,12 @@
-<div *ngIf="!moviesDownloaded" class="text-center">Loading...</div>
+<div class="cont" *ngIf="!moviesDownloaded">
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div>Loading...</div>
+</div>
 <slider [movies]="tvAnimation.slice(0, 6)" [isBanner]="true"></slider>
 <items-banner
   (handleRemove)="handleRemoveAnime($event)"
