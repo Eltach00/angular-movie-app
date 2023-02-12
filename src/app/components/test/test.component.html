@@ -23,3 +23,20 @@
     </label>
   </div>
 </div>
+<div class="number2" (click)="refresh()">
+  <button class="btn">Refresh</button>
+  <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackByFunc">
+    <li>
+      {{ user.name }}
+    </li>
+  </ng-template>
+  <!-- <ol>
+    <li *ngFor="let user of users; trackBy: trackByFunc">
+      {{ user.name }}
+    </li>
+  </ol> -->
+</div>
+
+<div class="number" colorDir [number]="number" [dividedBy]="5">
+  {{ number }}
+</div>

@@ -7,6 +7,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
 import { TestComponent } from './components/test/test.component';
+import { TestGuard } from './components/test/auth/test.guard';
 
 const routes: Routes = [
   {

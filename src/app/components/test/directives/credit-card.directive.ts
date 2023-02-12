@@ -16,13 +16,11 @@ export class CreditCardDirective {
     const numbers = [];
 
     for (let i = 0; i < trimmed.length; i += 4) {
-      numbers.push(trimmed.slice());
+      numbers.push(trimmed.slice(i, i + 4));
     }
 
-    input.value = trimmed;
+    input.value = numbers.join(' ');
   }
 
-  constructor(private element: ElementRef) {
-    console.log(this.element);
-  }
+  constructor(private element: ElementRef) {}
 }

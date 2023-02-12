@@ -1,10 +1,22 @@
-import { Directive } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appTest]'
+  selector: '[colorDir]',
+  host: {
+    '(click)': 'dirLogic()',
+  },
 })
 export class TestDirective {
+  @Input() number = 0;
+  @Input() dividedBy = 1;
 
-  constructor() { }
+  constructor(private el: ElementRef) {}
 
+  dirLogic() {
+    if (this.number % this.dividedBy !== 0) {
+      this.el.nativeElement.classList.add('red');
+    } else {
+      this.el.nativeElement.classList.add('green');
+    }
+  }
 }
