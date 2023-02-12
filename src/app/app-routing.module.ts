@@ -6,6 +6,8 @@ import { TvshowsComponent } from './pages/tvshows/tvshows.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
+import { TestComponent } from './components/test/test.component';
+import { TestGuard } from './components/test/auth/test.guard';
 
 const routes: Routes = [
   {
@@ -15,6 +17,10 @@ const routes: Routes = [
   {
     path: 'movies',
     component: MoviesComponent,
+  },
+  {
+    path: 'test',
+    component: TestComponent,
   },
   {
     path: 'movies/genre/:genreId',
