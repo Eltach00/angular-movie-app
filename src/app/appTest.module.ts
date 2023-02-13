@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreditCardDirective } from './components/test/directives/credit-card.directive';
 import { TestDirective } from './components/test/directives/test.directive';
 import { HeroComponent } from './components/test/hero/hero.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, ButtonModule],
   declarations: [
     TestComponent,
     AuthFormComponent,

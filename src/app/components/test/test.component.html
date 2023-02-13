@@ -23,8 +23,15 @@
     </label>
   </div>
 </div>
-<div class="number2" (click)="refresh()">
-  <button class="btn">Refresh</button>
+
+<div class="number2">
+  <button
+    pButton
+    label="Refresh"
+    (click)="refresh()"
+    class="p-button-plain p-button-sm"
+  ></button>
+
   <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackByFunc">
     <li>
       {{ user.name }}
