@@ -6,6 +6,7 @@ import { TestComponent } from './components/test/test.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreditCardDirective } from './components/test/directives/credit-card.directive';
 import { TestDirective } from './components/test/directives/test.directive';
+import { HeroComponent } from './components/test/hero/hero.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
@@ -15,6 +16,7 @@ import { TestDirective } from './components/test/directives/test.directive';
     RememberComponent,
     CreditCardDirective,
     TestDirective,
+    HeroComponent,
   ],
   exports: [TestComponent, AuthFormComponent, RememberComponent],
 })
