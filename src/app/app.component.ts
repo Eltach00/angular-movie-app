@@ -8,6 +8,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-movie-app';
 }
-
-//api key
-//bc44648b22d4e48cafa0d5a53472ebfd

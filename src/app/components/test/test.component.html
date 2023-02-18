@@ -1,0 +1,53 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 20px;
+  "
+>
+  <app-auth-form (submited)="loginUser($event)">
+    <h3>Create login</h3>
+    <app-remember (checked)="changeRemember($event)"></app-remember>
+    <button>Sign up</button>
+  </app-auth-form>
+  <div>
+    <label for="creditCard">
+      <input
+        type="text"
+        name="creditCard"
+        placeholder="Enter your 16-digit card number"
+        creditCard
+      />
+    </label>
+  </div>
+</div>
+
+<div class="number2">
+  <button
+    pButton
+    label="Refresh"
+    (click)="refresh()"
+    class="p-button-plain p-button-sm"
+  ></button>
+
+  <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackByFunc">
+    <li>
+      {{ user.name }}
+    </li>
+  </ng-template>
+  <!-- <ol>
+    <li *ngFor="let user of users; trackBy: trackByFunc">
+      {{ user.name }}
+    </li>
+  </ol> -->
+</div>
+
+<div class="number" colorDir [number]="number" [dividedBy]="5">
+  {{ number }}
+</div>
+
+<div>
+  <app-hero></app-hero>
+</div>
