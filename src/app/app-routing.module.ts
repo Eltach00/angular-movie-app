@@ -8,6 +8,7 @@ import { MovieComponent } from './pages/movie/movie.component';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
 import { TestComponent } from './components/test/test.component';
 import { TestGuard } from './components/test/auth/test.guard';
+import { MovieIdResolver } from './components/resolver/movie-id.resolver';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   {
     path: 'movie/:id',
     component: MovieComponent,
+    resolve: {
+      movieAllData: MovieIdResolver,
+    },
   },
   {
     path: 'tvshows',

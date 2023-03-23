@@ -8,6 +8,7 @@ import {
   Icredits,
   Igenres,
   ImovieDto,
+  IndividualMovie,
   Iphotos,
   Ivideos,
 } from 'src/app/models/Imovie';
@@ -31,8 +32,8 @@ export class MovieService {
         })
       );
   }
-  getMovie(id: string) {
-    return this.http.get(env['MOVIE'] + id, {
+  getMovie(id: string): Observable<IndividualMovie> {
+    return this.http.get<IndividualMovie>(env['MOVIE'] + id, {
       params: {
         api_key: API_KEY,
       },

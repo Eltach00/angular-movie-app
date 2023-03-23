@@ -28,33 +28,19 @@ export class MovieComponent implements OnInit, OnDestroy {
     private movieService: MovieService
   ) {}
   ngOnInit(): void {
-    this.route.params.pipe(first()).subscribe(({ id }: { id: number }) => {
-      forkJoin([
-        this.movieService.getMovie(id.toString()),
-        this.movieService.getMovieVideos(id.toString()),
-        this.movieService.getMoviePhotos(id.toString()),
-        this.movieService.getMovieCredits(id.toString()),
-      ]).subscribe((resp: [any, Ivideos, Iphotos, Icredits]) => {
-        this.movie = resp[0];
-        this.movieVideos = resp[1];
-        this.moviePhotos = resp[2];
-        this.credits = resp[3];
+    this.route.data.subscribe(
+      ({
+        movieAllData,
+      }: {
+        movieAllData: [IndividualMovie, Ivideos, Iphotos, Icredits];
+      }) => {
+        this.movie = movieAllData[0];
+        this.movieVideos = movieAllData[1];
+        this.moviePhotos = movieAllData[2];
+        this.credits = movieAllData[3];
         this.downloaded = true;
-      });
-      // this.movieService.getMovie(id.toString()).subscribe((resp: any) => {
-      //   this.movie = resp;
-      // });
-      // this.movieService
-      //   .getMovieVideos(id.toString())
-      //   .subscribe((resp: Ivideos) => {
-      //     this.movieVideos = resp;
-      //   });
-      // this.movieService
-      //   .getMoviePhotos(id.toString())
-      //   .subscribe((resp: Iphotos) => {
-      //     this.moviePhotos = resp;
-      //   });
-    });
+      }
+    );
   }
   ngOnDestroy(): void {}
 }

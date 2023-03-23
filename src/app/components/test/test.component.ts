@@ -1,5 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { defineSteps } from './defineSteps';
 
 @Component({
   selector: 'app-test',
@@ -12,6 +14,18 @@ export class TestComponent implements OnInit {
   count = 0;
   data = [];
   myObservable: Observable<number[]>;
+  steps = [
+    // {
+    //   step: 'APPLICATION_FORM',
+    //   status: 'IN_PROGRESS',
+    // },
+    // {
+    //   step: 'CURRENCY_FORM',
+    //   status: 'IN_PROGRESS',
+    // },
+  ];
+
+  constructor(private router: Router) {}
 
   users = [
     {
@@ -28,14 +42,16 @@ export class TestComponent implements OnInit {
     },
   ];
   ngOnInit(): void {
-    this.myObservable = new Observable<number[]>((observer) => {
-      setInterval(() => {
-        this.count++;
-        this.data.push(this.count);
-        observer.next(this.data);
-      }, 500);
-    });
+    // this.myObservable = new Observable<number[]>((observer) => {
+    //   setInterval(() => {
+    //     this.count++;
+    //     this.data.push(this.count);
+    //     observer.next(this.data);
+    //   }, 500);
+    // });
     // this.consoleData();
+
+    defineSteps(this.steps, this.router);
   }
 
   refresh() {
