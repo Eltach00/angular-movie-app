@@ -1,15 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first, forkJoin } from 'rxjs';
 import imageSizess from 'src/app/constants/image-sizess';
 import {
   Icredits,
-  Imovie,
   IndividualMovie,
   Iphotos,
   Ivideos,
 } from 'src/app/models/Imovie';
-import { MovieService } from 'src/app/shared/services/movie-service.service';
 
 @Component({
   selector: 'app-movie',
@@ -23,10 +20,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   imageSize = imageSizess;
   downloaded = false;
   credits: Icredits;
-  constructor(
-    private route: ActivatedRoute,
-    private movieService: MovieService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.route.data.subscribe(
       ({
