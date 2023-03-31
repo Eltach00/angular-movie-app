@@ -57,28 +57,4 @@ export class HomeComponent implements OnInit {
       (item) => item.id != event.id
     );
   }
-
-  //   this.movieServivce
-  //     .getMovies('MOVIES_POPULAR')
-  //     .subscribe((resp: Imovie[]) => {
-  //       this.popularMovies = resp.slice(0, 3);
-  //       this.moviesDownloaded = false;
-  //     });
-  //   this.movieServivce
-  //     .getMovies('MOVIES_UPCOMING')
-  //     .subscribe((resp: Imovie[]) => {
-  //       this.upcomingMovies = resp.slice(0, 3);
-  //       this.moviesDownloaded = false;
-  //     });
-  //   this.movieServivce
-  //     .getMovies('TRENDING_MOVIE_DAY')
-  //     .subscribe((resp: Imovie[]) => {
-  //       this.trendingMovies = resp.slice(0, 6);
-  //       this.moviesDownloaded = false;
-  //     });
-  //   this.movieServivce.getMovies('TRENDING_TV').subscribe((resp: Imovie[]) => {
-  //     this.trendingTvShows = resp.slice(0, 6);
-  //     this.moviesDownloaded = false;
-  //   });
-  // }
 }
