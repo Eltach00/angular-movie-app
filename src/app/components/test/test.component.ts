@@ -2,6 +2,7 @@ import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { defineSteps } from './defineSteps';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-test',
@@ -25,7 +26,7 @@ export class TestComponent implements OnInit {
     // },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cookie: CookieService) {}
 
   users = [
     {
@@ -50,8 +51,13 @@ export class TestComponent implements OnInit {
     //   }, 500);
     // });
     // this.consoleData();
+    // defineSteps(this.steps, this.router);
+    this.cookie.set('test', 'value');
+  }
 
-    defineSteps(this.steps, this.router);
+  checkCookie() {
+    const value = this.cookie.get('test');
+    console.log(value);
   }
 
   refresh() {
@@ -89,5 +95,9 @@ export class TestComponent implements OnInit {
 
   loginUser(event) {
     console.log(event, this.remember);
+  }
+
+  handleChange(event) {
+    console.log(event);
   }
 }
