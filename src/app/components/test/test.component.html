@@ -1,12 +1,16 @@
-<div
-  style="
+<div>
+  <li *ngFor="let item of ponies; let a = even" [style.color]=" a ? 'green' : '' ">
+    {{ item.name }}
+  </li>
+</div>
+
+<div style="
     display: flex;
     flex-direction: column;
     align-items: center;
     column-gap: 20px;
     row-gap: 20px;
-  "
->
+  ">
   <app-auth-form (submited)="loginUser($event)">
     <h3>Create login</h3>
     <app-remember (checked)="changeRemember($event)"></app-remember>
@@ -14,12 +18,7 @@
   </app-auth-form>
   <div>
     <label for="creditCard">
-      <input
-        type="text"
-        name="creditCard"
-        placeholder="Enter your 16-digit card number"
-        creditCard
-      />
+      <input type="text" name="creditCard" placeholder="Enter your 16-digit card number" creditCard />
     </label>
   </div>
 </div>

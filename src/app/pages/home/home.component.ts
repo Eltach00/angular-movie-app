@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { forkJoin } from 'rxjs';
 import { Imovie, ImovieDto } from 'src/app/models/Imovie';
 import { TvShow } from 'src/app/models/TvModels';
@@ -19,8 +20,11 @@ export class HomeComponent implements OnInit {
   moviesDownloaded = false;
   constructor(
     private movieServivce: MovieService,
-    private tvService: TvService
-  ) {}
+    private tvService: TvService,
+    title: Title
+  ) {
+    title.setTitle('Home Page');
+  }
 
   ngOnInit(): void {
     forkJoin([

@@ -1,8 +1,15 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  Inject,
+  LOCALE_ID,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, filter, map, range } from 'rxjs';
 import { defineSteps } from './defineSteps';
 import { CookieService } from 'ngx-cookie-service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-test',
@@ -15,18 +22,20 @@ export class TestComponent implements OnInit {
   count = 0;
   data = [];
   myObservable: Observable<number[]>;
-  steps = [
-    // {
-    //   step: 'APPLICATION_FORM',
-    //   status: 'IN_PROGRESS',
-    // },
-    // {
-    //   step: 'CURRENCY_FORM',
-    //   status: 'IN_PROGRESS',
-    // },
-  ];
 
-  constructor(private router: Router, private cookie: CookieService) {}
+  testdata = ['a', 'b', 'c', 'd', 'e', 'f'];
+  ponies = [{ name: 'Rainbow Dash' }, { name: 'Pinkie Pie' }];
+  refreshPonies(): void {
+    this.ponies = [{ name: 'Fluttershy' }, { name: 'Rarity' }];
+  }
+
+  constructor(
+    private router: Router,
+    private cookie: CookieService,
+    title: Title
+  ) {
+    title.setTitle('Test page');
+  }
 
   users = [
     {
@@ -43,16 +52,9 @@ export class TestComponent implements OnInit {
     },
   ];
   ngOnInit(): void {
-    // this.myObservable = new Observable<number[]>((observer) => {
-    //   setInterval(() => {
-    //     this.count++;
-    //     this.data.push(this.count);
-    //     observer.next(this.data);
-    //   }, 500);
-    // });
-    // this.consoleData();
-    // defineSteps(this.steps, this.router);
-    this.cookie.set('test', 'value');
+    this.router.events.subscribe((data) => {
+      console.log(data);
+    });
   }
 
   checkCookie() {

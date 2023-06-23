@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -27,6 +27,7 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestModule } from './appTest.module';
 import { CookieService } from 'ngx-cookie-service';
+import { AppInterceptor } from './shared/interceptor/app.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,10 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     TestModule,
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

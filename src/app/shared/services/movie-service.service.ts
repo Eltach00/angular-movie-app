@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import {
   Iphotos,
   Ivideos,
 } from 'src/app/models/Imovie';
+import { SHOULD_NOT_HANDLE_ERROR } from '../interceptor/app.interceptor';
+
+const headers = { 'should-not-handle-error': 'true' };
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +23,13 @@ export class MovieService {
   constructor(private http: HttpClient) {}
 
   getMovies(movieType: string, count: number = 20) {
+    const context = new HttpContext().set(SHOULD_NOT_HANDLE_ERROR, true);
     return this.http
       .get<ImovieDto>(env[movieType], {
         params: {
           api_key: API_KEY,
         },
+        context,
       })
       .pipe(
         switchMap((resp) => {
