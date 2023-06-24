@@ -6,8 +6,6 @@ import { TvshowsComponent } from './pages/tvshows/tvshows.component';
 import { GenresComponent } from './pages/genres/genres.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { TvshowComponent } from './pages/tvshow/tvshow.component';
-import { TestComponent } from './components/test/test.component';
-import { testGuard } from './components/test/auth/test.guard';
 import { MovieIdResolver } from './components/resolver/movie-id.resolver';
 
 const routes: Routes = [
@@ -21,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'test',
-    component: TestComponent,
+    loadChildren: () => import('./pages/test-module/test-module.module'),
   },
   {
     path: 'movies/genre/:genreId',
