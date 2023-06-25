@@ -10,6 +10,7 @@ import { Observable, filter, map, range } from 'rxjs';
 import { defineSteps } from './defineSteps';
 import { CookieService } from 'ngx-cookie-service';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-test',
@@ -32,9 +33,18 @@ export class TestComponent implements OnInit {
   constructor(
     private router: Router,
     private cookie: CookieService,
-    title: Title
+    title: Title,
+    public translate: TranslateService
   ) {
+    this.translate.addLangs(['en', 'ru']);
+
+    this.translate.use('en');
     title.setTitle('Test page');
+  }
+
+  switchLang(e: Event) {
+    const select = e.target as HTMLSelectElement;
+    this.translate.use(select.value);
   }
 
   users = [
@@ -52,9 +62,9 @@ export class TestComponent implements OnInit {
     },
   ];
   ngOnInit(): void {
-    this.router.events.subscribe((data) => {
-      console.log(data);
-    });
+    // this.router.events.subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   checkCookie() {

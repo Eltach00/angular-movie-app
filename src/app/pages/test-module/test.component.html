@@ -1,10 +1,24 @@
-<div>
+<!-- <div>
   <li *ngFor="let item of ponies; let a = even" [style.color]=" a ? 'green' : '' ">
     {{ item.name }}
   </li>
-</div>
+</div> -->
 
-<div style="
+<select (change)="switchLang($event)">
+  <option *ngFor="let lang of translate.langs" [value]="lang" [selected]="lang === translate.currentLang">{{lang}}
+  </option>
+</select>
+
+{{ 'test' | translate}}
+
+<hr [ngStyle]="{ marginBottom: '100px'}">
+
+<app-test-form></app-test-form>
+
+
+<hr>
+
+<!-- <div style="
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +35,7 @@
       <input type="text" name="creditCard" placeholder="Enter your 16-digit card number" creditCard />
     </label>
   </div>
-</div>
+</div> -->
 <div class="number2" (click)="refresh()">
   <button class="btn">Refresh</button>
   <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackByFunc">
