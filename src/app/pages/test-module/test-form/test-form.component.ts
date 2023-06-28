@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
-  FormControl,
-  FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-test-form',
@@ -12,26 +13,51 @@ import {
   styleUrls: ['./test-form.component.scss'],
 })
 export class TestFormComponent {
-  myForm: FormGroup<{
-    username: FormControl<string>;
-    password: FormControl<string>;
-  }>;
-  username: FormControl<string>;
-  password: FormControl<string>;
+  usernameCtrl = this.formBuilder.control('', Validators.required);
+  passwordCtrl = this.formBuilder.control('', Validators.required);
+  confirmCtrl = this.formBuilder.control('', Validators.required);
+  passwordStrength = 0;
+  tagsArray = this.formBuilder.array(['']);
+
+  passwordForm = this.formBuilder.group(
+    {
+      password: this.passwordCtrl,
+      confirm: this.confirmCtrl,
+    },
+    { validators: TestFormComponent.matchPass }
+  );
+
+  userForm = this.formBuilder.group(
+    {
+      username: this.usernameCtrl,
+      passwordForm: this.passwordForm,
+      tags: this.tagsArray,
+    },
+    { updateOn: 'blur' }
+  );
 
   constructor(private formBuilder: FormBuilder) {
-    this.username = this.formBuilder.control('', [
-      Validators.required,
-      Validators.minLength(2),
-    ]);
-    this.password = this.formBuilder.control('');
-    this.myForm = this.formBuilder.group({
-      username: this.username,
-      password: this.password,
-    });
+    this.passwordCtrl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((newValue) => {
+        this.passwordStrength = newValue ? newValue.length : 0;
+      });
   }
 
-  onSubmit(): void {
-    console.log(this.myForm.value);
+  static matchPass = (ct: AbstractControl): ValidationErrors | null => {
+    const pass = ct.get('password').value;
+    const confirmCtrl = ct.get('confirm').value;
+    return pass === confirmCtrl ? null : { notMatch: true };
+  };
+
+  register(): void {
+    console.log(this.userForm.value);
+  }
+
+  addTag() {
+    this.tagsArray.push(this.formBuilder.control(''));
+  }
+  removeTag(i: number) {
+    this.tagsArray.removeAt(i);
   }
 }
