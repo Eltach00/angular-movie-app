@@ -44,20 +44,6 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  handleRemoveAnime(event) {
-    this.tvAnimation = this.tvAnimation.filter((item) => item.id != event.id);
-  }
-  handleRemoveMovies(event) {
-    this.trendingMovies = this.trendingMovies.filter(
-      (item) => item.id != event.id
-    );
-  }
-  handleRemoveTvShows(event) {
-    this.trendingTvShows = this.trendingTvShows.filter(
-      (item) => item.id != event.id
-    );
-  }
-
   //   this.movieServivce
   //     .getMovies('MOVIES_POPULAR')
   //     .subscribe((resp: Imovie[]) => {

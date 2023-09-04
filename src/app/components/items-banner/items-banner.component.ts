@@ -11,9 +11,6 @@ import { TvShow } from 'src/app/models/TvModels';
 export class ItemsBannerComponent {
   @Input() movies: (Imovie | TvShow)[];
   @Input() linkName: string;
-  @Output() handleRemove = new EventEmitter();
-  handleClick(event) {
-    this.handleRemove.emit(event);
-  }
+
   imageSize = imageSizess;
 }

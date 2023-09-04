@@ -9,21 +9,18 @@
 </div>
 <slider [movies]="tvAnimation.slice(0, 6)" [isBanner]="true"></slider>
 <items-banner
-  (handleRemove)="handleRemoveAnime($event)"
   linkName="tvshow/"
   [movies]="tvAnimation"
 >
   <h2>Anime</h2>
 </items-banner>
 <items-banner
-  (handleRemove)="handleRemoveMovies($event)"
   linkName="movie/"
   [movies]="trendingMovies"
 >
   <h2>Trending Movies</h2>
 </items-banner>
 <items-banner
-  (handleRemove)="handleRemoveTvShows($event)"
   linkName="tvshow/"
   [movies]="trendingTvShows"
 >

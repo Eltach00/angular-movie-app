@@ -11,9 +11,6 @@ import { TvShow } from 'src/app/models/TvModels';
 export class ItemComponent {
   @Input() item: Imovie | TvShow;
   @Input() linkName: string;
-  @Output() clickBtn = new EventEmitter();
-  onClick() {
-    this.clickBtn.emit(this.item);
-  }
+
   imageSize = imageSizes.MEDIUM_SIZE;
 }
